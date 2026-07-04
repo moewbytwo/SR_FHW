@@ -1,58 +1,92 @@
 body {
-    background-color: #dedede;
+  background-color: #dedede;
+  font-family: Arial, sans-serif;
 }
 
 h1 {
-    text-align: center;
-    font-family: Arial, sans-serif;
-    font-size: 32px;
+  text-align: center;
+  font-size: 32px;
 }
 
 a {
-    color: #000;
-    text-decoration: none;
-    font-family: Arial, sans-serif;
+  color: #000;
+  text-decoration: none;
 }
 
 p {
-   font-size: 25px;
-   font-family: Arial, sans-serif;
-   text-align: center;
+  font-size: 18px;
+  text-align: center;
+  margin: 10px;
 }
 
-div img {
-    width: 150px;
-    height: 150px;
-    display: block;
-    margin: auto;
+/* Mobile-first: 1 cột grid */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
 }
 
-div {
-  display: block;      /* mobile: mỗi div chiếm full width */
-  width: 90%;
-  margin: 10px auto;
-  padding: 5px;
+figure {
+  border: 2px solid #333;
+  padding: 10px;
+  text-align: center;
 }
 
-/* Tablet view: từ 772px trở lên */
+/* Tablet view ≥ 772px */
 @media (min-width: 772px) {
-  div {
-    width: 45%;
-    display: inline-block;
-    vertical-align: top;
+  .grid {
+    grid-template-columns: 1fr 1fr;
   }
 
-  div img {
-    max-height: 30vh;  /* ảnh không quá 30% chiều cao viewport */
-    width: auto;
+  figure img {
+    border-radius: 50%; /* hình tròn */
+  }
+
+  /* phần tử cuối cùng chiếm cả 2 cột */
+  .grid figure:last-child {
+    grid-column: span 2;
   }
 }
 
-/* Large screen view: từ 998px trở lên */
-@media (min-width: 998px) {
-  div {
-    width: 30%;
-    display: inline-block;
-    vertical-align: top;
+/* Large screen view ≥ 992px */
+@media (min-width: 992px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* mỗi phần tử thứ 3 chiếm cả 2 cột */
+  .grid figure:nth-child(3n) {
+    grid-column: span 2;
+  }
+
+  /* bỏ border-radius */
+  figure img {
+    border-radius: 0;
+  }
+}
+
+/* Prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto; /* xóa hành vi cuộn mượt */
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Prefers-color-scheme: dark */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #111;
+    color: #eee;
+  }
+
+  figure {
+    background-color: #222;
+    border: 2px solid #000;
+  }
+
+  figcaption {
+    color: yellow; /* chữ sáng hơn */
   }
 }
